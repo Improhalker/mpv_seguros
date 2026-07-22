@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant Page as pages/leads/index.vue
+  participant Comp as useLeads.ts
+  participant BFF as server/api/leads/index.get.ts
+  participant API as LeadController
+  participant Req as ListLeadsRequest
+  participant Service as LeadService
+  participant DB as PostgreSQL
+  Page->>Comp: fetchLeads()
+  Comp->>BFF: GET /api/leads
+  BFF->>API: GET /api/leads
+  API->>Req: validate()
+  API->>Service: paginate(validated)
+  Service->>DB: query leads
+  DB-->>Service: rows paginadas
+  Service-->>API: paginator
+  API-->>BFF: LeadResource collection
+  BFF-->>Comp: JSON
+  Comp-->>Page: estado reativo

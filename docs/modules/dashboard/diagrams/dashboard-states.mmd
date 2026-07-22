@@ -1,0 +1,10 @@
+stateDiagram-v2
+  [*] --> Loading
+  Loading --> Success: dados
+  Loading --> Empty: sem leads
+  Loading --> Error: falha
+  Success --> Refreshing: novo período
+  Refreshing --> Success: resposta
+  Refreshing --> Success: mantém dados
+  Empty --> Loading: tentar
+  Error --> Loading: tentar

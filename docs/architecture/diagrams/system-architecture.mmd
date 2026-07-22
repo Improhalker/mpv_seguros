@@ -1,0 +1,8 @@
+flowchart LR
+  User["Usuário"] --> Nuxt["Nuxt 4\nPáginas e componentes"]
+  Nuxt --> BFF["Nuxt BFF\nserver/api"]
+  BFF -->|"Bearer quando há cookie"| API["Laravel API\nroutes/api.php"]
+  API --> Services["Controllers, Requests\ne Services"]
+  Services --> DB[("PostgreSQL\nSupabase")]
+  API --> BFF
+  BFF --> Nuxt

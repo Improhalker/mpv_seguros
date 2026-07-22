@@ -1,0 +1,32 @@
+erDiagram
+  ORGANIZATIONS ||--o{ USERS : has
+  ORGANIZATIONS ||--o{ LEADS : owns_optional
+  USERS ||--o{ LEADS : assigned_optional
+  LEADS ||--o{ LEAD_INTERACTIONS : has
+  USERS ||--o{ LEAD_INTERACTIONS : author_optional
+  ORGANIZATIONS {
+    bigint id PK
+    string name
+    string timezone
+  }
+  USERS {
+    bigint id PK
+    bigint organization_id FK
+    string email
+    boolean is_active
+  }
+  LEADS {
+    uuid id PK
+    bigint organization_id FK
+    bigint assigned_user_id FK
+    string status
+    numeric qualification_score
+    timestamptz next_contact_at
+  }
+  LEAD_INTERACTIONS {
+    uuid id PK
+    uuid lead_id FK
+    bigint user_id FK
+    string type
+    timestamptz occurred_at
+  }

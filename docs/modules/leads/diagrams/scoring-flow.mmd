@@ -1,0 +1,8 @@
+flowchart TD
+  Input["Quatro notas de 1 a 5"] --> Check{"Há ao menos\numa nota?"}
+  Check -->|Não| Null["qualification_score = null"]
+  Check -->|Sim| Weights["Soma ponderada\ne pesos preenchidos"]
+  Weights --> Formula["(soma / pesos) × 2"]
+  Formula --> Round["Arredonda para 1 decimal"]
+  Round --> Save["Backend persiste\nnumeric(3,1)"]
+  Save --> UI["Frontend mostra\n8,8 / 10"]

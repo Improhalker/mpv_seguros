@@ -1,0 +1,10 @@
+stateDiagram-v2
+  [*] --> novo
+  novo --> contatado
+  contatado --> em_negociacao
+  em_negociacao --> aguardando_cliente
+  aguardando_cliente --> em_negociacao
+  em_negociacao --> fechado
+  em_negociacao --> perdido
+  fechado --> [*]
+  perdido --> [*]

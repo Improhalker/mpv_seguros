@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant Page as dashboard/index.vue
+  participant Comp as useDashboard.ts
+  participant BFF as server/api/dashboard.get.ts
+  participant API as DashboardController
+  participant Service as DashboardService
+  participant DB as PostgreSQL
+  Page->>Comp: onMounted()
+  Comp->>BFF: GET /api/dashboard?period=30
+  BFF->>API: GET /api/dashboard
+  API->>Service: get(validated)
+  Service->>DB: agregações e listas limitadas
+  DB-->>Service: resumo, séries e leads
+  Service-->>API: payload agregado
+  API-->>BFF: DashboardResource
+  BFF-->>Comp: DashboardData
+  Comp-->>Page: cards, gráficos e listas

@@ -1,0 +1,11 @@
+flowchart TD
+  Form["LeadForm.vue"] --> Create["POST /api/leads"]
+  Create --> Validate["StoreLeadRequest"]
+  Validate --> Service["LeadService::create"]
+  Service --> Score["Calcula qualification_score"]
+  Score --> Save[("leads")]
+  Save --> Detail["Detalhe do lead"]
+  Detail --> Interaction["Registrar interação"]
+  Interaction --> Dates["Atualiza last_contact_at\ne next_contact_at"]
+  Detail --> Status["Altera status"]
+  Status --> Terminal["closed_at ou lost_at"]
