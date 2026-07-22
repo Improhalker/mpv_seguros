@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('lead_interactions', function (Blueprint $table): void {
+            $table->uuid('id')->primary();
+            $table->foreignUuid('lead_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('type');
+            $table->text('description');
+            $table->timestampTz('occurred_at');
+            $table->timestampTz('next_contact_at')->nullable();
+            $table->timestamps();
+
+            $table->index(['lead_id', 'occurred_at']);
+        });
+
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement('alter table lead_interactions enable row level security');
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('lead_interactions');
+    }
+};
