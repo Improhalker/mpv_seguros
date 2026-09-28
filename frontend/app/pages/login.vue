@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { LoaderCircle, LockKeyhole } from 'lucide-vue-next'
-import { SUPPORT_EMAIL } from '~/constants/site'
 
 definePageMeta({
   layout: false,
@@ -51,12 +50,6 @@ async function handleSubmit(): Promise<void> {
             Entrar
           </Button>
         </form>
-        <p class="mt-6 text-center text-xs text-muted-foreground">
-          Precisa de ajuda?
-          <a class="underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" :href="`mailto:${SUPPORT_EMAIL}`">
-            {{ SUPPORT_EMAIL }}
-          </a>
-        </p>
       </CardContent>
     </Card>
   </main>
